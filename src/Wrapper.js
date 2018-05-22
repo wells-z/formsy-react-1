@@ -45,6 +45,7 @@ const propTypes = {
     PropTypes.string,
   ]),
   value: PropTypes.any, // eslint-disable-line react/forbid-prop-types
+  formsy: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export {

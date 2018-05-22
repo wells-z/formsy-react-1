@@ -377,11 +377,18 @@ class Formsy extends React.Component {
       ...nonFormsyProps
     } = this.props;
 
-    return <form onReset={this.resetInternal} onSubmit={this.submit} {...nonFormsyProps} disabled={false}>
-      {React.Children.map(this.props.children, child => {
-        return child && React.cloneElement(child, {formsy: this.methodsToPassToChildren});
-      })}
-    </form>;
+    return (
+      <form
+        onReset={this.resetInternal}
+        onSubmit={this.submit}
+        {...nonFormsyProps}
+        disabled={false}
+      >
+        { React.Children.map(this.props.children, child =>
+          child && React.cloneElement(child, { formsy: this.methodsToPassToChildren })
+        ) }
+      </form>
+    );
   }
 }
 
