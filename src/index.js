@@ -11,12 +11,22 @@ import Wrapper, { propTypes } from './Wrapper';
 class Formsy extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       isValid: true,
       isSubmitting: false,
       canChange: false,
     };
+
     this.inputs = [];
+
+    this.methodsToPassToChildren = {
+      attachToForm: this.attachToForm,
+      detachFromForm: this.detachFromForm,
+      validate: this.validate,
+      isFormDisabled: this.isFormDisabled,
+      isValidValue: (component, value) => this.runValidation(component, value).isValid,
+    };
   }
 
   getChildContext = () => (
@@ -367,16 +377,11 @@ class Formsy extends React.Component {
       ...nonFormsyProps
     } = this.props;
 
-    return React.createElement(
-      'form',
-      {
-        onReset: this.resetInternal,
-        onSubmit: this.submit,
-        ...nonFormsyProps,
-        disabled: false,
-      },
-      this.props.children,
-    );
+    return <form onReset={this.resetInternal} onSubmit={this.submit} {...nonFormsyProps} disabled={false}>
+      {React.Children.map(this.props.children, child => {
+        return child && React.cloneElement(child, {formsy: this.methodsToPassToChildren});
+      })}
+    </form>;
   }
 }
 

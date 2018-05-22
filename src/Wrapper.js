@@ -72,7 +72,7 @@ export default (Component) => {
         this.setValidations(this.props.validations, this.props.required);
 
         // Pass a function instead?
-        this.context.formsy.attachToForm(this);
+        this.props.formsy.attachToForm(this);
       };
 
       if (!this.props.name) {
@@ -97,13 +97,13 @@ export default (Component) => {
       // If validations or required is changed, run a new validation
       if (!utils.isSame(this.props.validations, prevProps.validations) ||
         !utils.isSame(this.props.required, prevProps.required)) {
-        this.context.formsy.validate(this);
+        this.props.formsy.validate(this);
       }
     }
 
     // Detach it when component unmounts
     componentWillUnmount() {
-      this.context.formsy.detachFromForm(this);
+      this.props.formsy.detachFromForm(this);
     }
 
     getErrorMessage = () => {
@@ -139,14 +139,14 @@ export default (Component) => {
           value,
           isPristine: false,
         }, () => {
-          this.context.formsy.validate(this);
+          this.props.formsy.validate(this);
         });
       }
     }
 
     hasValue = () => this.state.value !== '';
 
-    isFormDisabled = () => this.context.formsy.isFormDisabled();
+    isFormDisabled = () => this.props.formsy.isFormDisabled();
 
     isFormSubmitted = () => this.state.formSubmitted;
 
@@ -157,14 +157,14 @@ export default (Component) => {
     isValid = () => this.state.isValid;
 
     isValidValue = value =>
-      this.context.formsy.isValidValue.call(null, this, value);
+      this.props.formsy.isValidValue.call(null, this, value);
 
     resetValue = () => {
       this.setState({
         value: this.state.pristineValue,
         isPristine: true,
       }, () => {
-        this.context.formsy.validate(this);
+        this.props.formsy.validate(this);
       });
     }
 
