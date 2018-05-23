@@ -29,18 +29,6 @@ class Formsy extends React.Component {
     };
   }
 
-  getChildContext = () => (
-    {
-      formsy: {
-        attachToForm: this.attachToForm,
-        detachFromForm: this.detachFromForm,
-        validate: this.validate,
-        isFormDisabled: this.isFormDisabled,
-        isValidValue: (component, value) => this.runValidation(component, value).isValid,
-      },
-    }
-  )
-
   componentDidMount = () => {
     this.validateForm();
   }
@@ -453,10 +441,6 @@ Formsy.propTypes = {
   showError: PropTypes.func,
   showRequired: PropTypes.func,
   validationErrors: PropTypes.object, // eslint-disable-line
-};
-
-Formsy.childContextTypes = {
-  formsy: PropTypes.object,
 };
 
 const addValidationRule = (name, func) => {

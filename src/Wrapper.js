@@ -212,10 +212,6 @@ export default (Component) => {
 
   WrappedComponent.displayName = `Formsy(${getDisplayName(Component)})`;
 
-  WrappedComponent.contextTypes = {
-    formsy: PropTypes.object, // What about required?
-  };
-
   WrappedComponent.defaultProps = {
     innerRef: () => {},
     required: false,
