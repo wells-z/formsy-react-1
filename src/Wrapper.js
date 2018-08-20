@@ -56,6 +56,7 @@ export default (Component) => {
   class WrappedComponent extends React.Component {
     constructor(props) {
       super(props);
+
       this.state = {
         value: props.value,
         isRequired: false,
@@ -69,18 +70,20 @@ export default (Component) => {
     }
 
     componentWillMount() {
-      const configure = () => {
-        this.setValidations(this.props.validations, this.props.required);
-
-        // Pass a function instead?
-        this.props.formsy.attachToForm(this);
-      };
-
       if (!this.props.name) {
-        throw new Error('Form Input requires a name property when used');
+        throw new Error('Form field requires a name property when used');
       }
 
-      configure();
+      this.setValidations(this.props.validations, this.props.required);
+
+      this.props.formsy.attachToForm(this);
+    }
+
+    componentDidMount() {
+      this.props.formsy.addStateToForm(this.props.name, {
+        value: this.props.value,
+        isRequired: this.props.isRequired,
+      });
     }
 
     // We have to make sure the validate method is kept when new props are added

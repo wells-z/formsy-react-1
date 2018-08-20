@@ -277,7 +277,7 @@ export default {
 
       const form = TestUtils.renderIntoDocument(<TestForm/>);
 
-      test.equal(form.refs.formsy.state.isValid, true);
+      test.equal(form.refs.formsy.isValid, true);
       form.addInput();
 
       immediate(() => {
@@ -318,7 +318,7 @@ export default {
 
       const form = TestUtils.renderIntoDocument(<TestForm/>);
 
-      test.equal(form.refs.formsy.state.isValid, false);
+      test.equal(form.refs.formsy.isValid, false);
       form.removeInput();
 
       immediate(() => {

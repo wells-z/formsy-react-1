@@ -6,23 +6,35 @@ import utils from './utils';
 import validationRules from './validationRules';
 import Wrapper, { propTypes } from './Wrapper';
 
-/* eslint-disable react/no-unused-state, react/default-props-match-prop-types */
+/* eslint-disable react/default-props-match-prop-types */
 
 class Formsy extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      isValid: true,
-      isSubmitting: false,
-      canChange: false,
-    };
+    //no need to be in state, they don't affect rendering
+    this.isValid = true;
+    this.canChange = false;
+    this.isMounted = false;
 
+    //references to children, should aim to remove this
     this.inputs = [];
+
+    //using this to batch input state updates
+    //instead of setting state evrey time an input mounts
+    //we add its state here
+    //then do one setState for the form in its CDM
+    this.preMountInputState = {};
+
+    this.state = {
+      inputs: {},
+    };
 
     this.methodsToPassToChildren = {
       attachToForm: this.attachToForm,
       detachFromForm: this.detachFromForm,
+      addStateToForm: this.addStateToForm,
+      removeStateFromForm: this.removeStateFromForm,
       validate: this.validate,
       isFormDisabled: this.isFormDisabled,
       isValidValue: (component, value) => this.runValidation(component, value).isValid,
@@ -30,6 +42,12 @@ class Formsy extends React.Component {
   }
 
   componentDidMount = () => {
+    this.isMounted = true;
+
+    this.setState({
+      inputs: this.preMountInputState,
+    })
+
     this.validateForm();
   }
 
@@ -206,7 +224,7 @@ class Formsy extends React.Component {
   // Method put on each input component to register
   // itself to the form
   attachToForm = (component) => {
-    if (this.inputs.indexOf(component) === -1) {
+    if (!this.inputs.includes(component)) {
       this.inputs.push(component);
     }
 
@@ -219,10 +237,36 @@ class Formsy extends React.Component {
     const componentPos = this.inputs.indexOf(component);
 
     if (componentPos !== -1) {
-      this.inputs = this.inputs.slice(0, componentPos).concat(this.inputs.slice(componentPos + 1));
+      this.inputs.splice(componentPos, 1);
     }
 
     this.validateForm();
+  }
+
+  addStateToForm = (name, state) => {
+    // if it's mounted we are free to set state
+    if (this.isMounted) {
+      this.setState({
+        inputs: {
+          ...this.state.inputs,
+          [name]: state,
+        },
+      });
+    // if not mounted then it's the first render
+    // we batch state updates to minimize rerenders
+    } else {
+      this.preMountInputState[name] = state;
+    }
+  }
+
+  removeStateFromForm = (name) => {
+    const newState = {...this.inputs.state};
+
+    delete newState[name];
+
+    this.setState({
+      inputs: newState,
+    });
   }
 
   // Checks if the values have changed from their initial value
@@ -240,7 +284,7 @@ class Formsy extends React.Component {
     this.setFormPristine(false);
     const model = this.getModel();
     this.props.onSubmit(model, this.resetModel, this.updateInputsWithError);
-    if (this.state.isValid) {
+    if (this.isValid) {
       this.props.onValidSubmit(model, this.resetModel, this.updateInputsWithError);
     } else {
       this.props.onInvalidSubmit(model, this.resetModel, this.updateInputsWithError);
@@ -269,7 +313,7 @@ class Formsy extends React.Component {
   // state of the form itself
   validate = (component) => {
     // Trigger onChange
-    if (this.state.canChange) {
+    if (this.canChange) {
       this.props.onChange(this.getModel(), this.isChanged());
     }
 
@@ -290,22 +334,16 @@ class Formsy extends React.Component {
     // We need a callback as we are validating all inputs again. This will
     // run when the last component has set its state
     const onValidationComplete = () => {
-      const allIsValid = this.inputs.every(component => component.state.isValid);
+      this.isValid = this.inputs.every(component => component.state.isValid);
 
-      this.setState({
-        isValid: allIsValid,
-      });
-
-      if (allIsValid) {
+      if (this.isValid) {
         this.props.onValid();
       } else {
         this.props.onInvalid();
       }
 
       // Tell the form that it can start to trigger change events
-      this.setState({
-        canChange: true,
-      });
+      this.canChange = true;
     };
 
     // Run validation again in case affected by other inputs. The
@@ -327,9 +365,7 @@ class Formsy extends React.Component {
     // If there are no inputs, set state where form is ready to trigger
     // change event. New inputs might be added later
     if (!this.inputs.length) {
-      this.setState({
-        canChange: true,
-      });
+      this.canChange = true;
     }
   }
 
