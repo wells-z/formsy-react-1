@@ -1,0 +1,33 @@
+setFormPristine()
+		sets the form and all inputs to pristine
+		an input has formSubmitted and isPristine in state but the form only has formSubmitted, both are set, formSubmitted = !isPristine
+		formPristine should be passed as a prop, not copied to input state
+
+isFormDisabled()
+		redundant, should just pass formDisabled boolean prop to inputs
+
+mapModel()
+		wtf is it doing when there's no mapping... I guess enforcing . notation?
+
+
+validateForm()
+		turn setState into functional
+
+setInputValidationErrors
+		turn setState into functional
+
+updateInputsWithErrors
+		maybe optimize to call setState only once
+
+attachToForm, detachFromFrom
+		these still needed? if not move method calls that are still needed to addStateToForm and removeStateFromForm
+
+
+
+
+
+
+
+
+special:
+	support name change

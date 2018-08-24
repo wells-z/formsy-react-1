@@ -1,9 +1,8 @@
 import React from 'react';
 import TestUtils from 'react-dom/test-utils';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import sinon from 'sinon';
 
-import Formsy, { withFormsy } from './..';
+import Formsy, { withFormsy } from '../src';
 import TestInput, { InputFactory } from './utils/TestInput';
 import immediate from './utils/immediate';
 
@@ -17,13 +16,13 @@ export default {
       </Formsy>
     );
 
-    const input = TestUtils.findRenderedDOMComponentWithTag(form, 'INPUT');
+    let input = TestUtils.findRenderedDOMComponentWithTag(form, 'INPUT');
     test.equal(input.value, 'foo');
     TestUtils.Simulate.change(input, {target: {value: 'foobar'}});
+
+    input = TestUtils.findRenderedDOMComponentWithTag(form, 'INPUT');
     test.equal(input.value, 'foobar');
-
     test.done();
-
   },
 
   'withFormsy: should only set the value and not validate when calling setValue(val, false)': function (test) {
@@ -36,19 +35,19 @@ export default {
             return <input type="text" value={this.props.value} onChange={this.updateValue}/>;
         }
     })
+
     const form = TestUtils.renderIntoDocument(
         <Formsy>
             <Input name="foo" value="foo" innerRef="comp" />
         </Formsy>
     );
-    const inputComponent = TestUtils.findRenderedComponentWithType(form, Input);
-    const setStateSpy = sinon.spy(inputComponent, 'setState');
+
+    const validateSpy = sinon.spy(form, 'validate');
     const inputElement = TestUtils.findRenderedDOMComponentWithTag(form, 'INPUT');
 
-    test.equal(setStateSpy.called, false);
+    validateSpy.reset();
     TestUtils.Simulate.change(inputElement, {target: {value: 'foobar'}});
-    test.equal(setStateSpy.calledOnce, true);
-    test.equal(setStateSpy.calledWithExactly({ value: 'foobar' }), true);
+    test.equal(validateSpy.notCalled, true);
     test.done();
 
   },
@@ -79,16 +78,22 @@ export default {
   'should return error message passed when calling getErrorMessage()': function (test) {
 
     let errorMessage = null;
-    const Input = InputFactory({
+
+    /*const Input = InputFactory({
       componentDidMount: function() {
         errorMessage = this.props.errorMessage;
       }
-    });
-    TestUtils.renderIntoDocument(
+    });*/
+
+    const form = TestUtils.renderIntoDocument(
       <Formsy>
-        <Input name="foo" value="foo" validations="isEmail" validationError="Has to be email"/>
+        <TestInput name="foo" value="foo" validations="isEmail" validationError="Has to be email"/>
       </Formsy>
     );
+
+    const input = TestUtils.findRenderedComponentWithType(form, TestInput);
+
+    errorMessage = input.getErrorMessage();
 
     test.equal(errorMessage, 'Has to be email');
 
@@ -98,22 +103,20 @@ export default {
 
   'should return true or false when calling isValid() depending on valid state': function (test) {
 
-    let isValid = null;
-    const Input = InputFactory({
-      componentWillReceiveProps: function(nextProps) {
-        isValid = nextProps.isValid;
-      }
-    });
     const form = TestUtils.renderIntoDocument(
       <Formsy action="/users">
-        <Input name="foo" value="foo" validations="isEmail"/>
+        <TestInput name="foo" value="foo" validations="isEmail"/>
       </Formsy>
     );
+    
+    let inputComponent = TestUtils.findRenderedComponentWithType(form, TestInput);
+    test.equal(inputComponent.props.isValid, false);
 
-    test.equal(isValid, false);
-    const input = TestUtils.findRenderedDOMComponentWithTag(form, 'INPUT');
-    TestUtils.Simulate.change(input, {target: {value: 'foo@foo.com'}});
-    test.equal(isValid, true);
+    let inputNode = TestUtils.findRenderedDOMComponentWithTag(form, 'INPUT');
+    TestUtils.Simulate.change(inputNode, {target: {value: 'foo@foo.com'}});
+
+    inputComponent= TestUtils.findRenderedDOMComponentWithTag(form, TestInput);
+    test.equal(inputComponent.props.isValid, true);
 
     test.done();
 
