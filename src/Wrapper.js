@@ -35,15 +35,17 @@ export default Component => {
     componentDidMount() {
       ReactDOM.unstable_batchedUpdates(() => {
         this.props.formsy.addStateToForm(this.props.name, {
-          value: this.props.value,
-          isRequired: this.props.isRequired,
-          isValid: true,
-          pristineValue: this.props.value,
-          validationError: this.props.validationError,
-          validationErrors: this.props.validationErrors,
-          validationErrorsMessages: [],
-          externalError: null,
-          formSubmitted: false,
+          currentValue: this.props.value,               //current value
+          isRequired: this.props.isRequired,                  //whether input is required
+          isValid: true,                                      //whether the current value passed all validations
+          pristineValue: this.props.value,                    //pristine value
+          validationError: this.props.validationError,        //default validation error message if one is not defined in validationErrors
+          validationErrors: this.props.validationErrors,      //validationErrors, maps validations to error messages
+          validationErrorsMessages: [],                       //error messages for currently failing validations
+          externalError: null,                                //whether there is an external validation error passed in as a prop
+          formSubmitted: false,                               //whether the current value has been submitted with the rest of the form
+          parsedValidations: null,                            //validations converted to objects used in runtime
+          parsedRequiredValidations: null,                    //required validations converted to objects used in runtime
         });
 
         this.setValidations(this.props.validations, this.props.required);
@@ -67,17 +69,26 @@ export default Component => {
         nextProps.externalError != this.props.externalError ||
         !isSame(nextProps.validationError, this.props.validationError) ||
         !isSame(nextProps.value, this.props.value) ||
+        !isSame(nextProps.currentValue, this.props.currentValue) ||
         nextProps.isFormDisabled != this.props.isFormDisabled ||
         nextProps.isFormSubmitted != this.props.isFormSubmitted;
     }
 
     componentDidUpdate(prevProps) {
-      // If validations or required is changed, run a new validation
-      if (!isSame(this.props.validations, prevProps.validations) ,
-        !isSame(this.props.required, prevProps.required)) {
+      ReactDOM.unstable_batchedUpdates(() => {
+        // If validations or required is changed, run a new validation
+        if (!isSame(this.props.validations, prevProps.validations) ,
+          !isSame(this.props.required, prevProps.required)) {
 
-        this.setValidations(this.props.validations, this.props.required);
-      }
+          this.setValidations(this.props.validations, this.props.required);
+        }
+
+        // allow value prop change to update the state
+        //if (typeof this.props.value != 'undefined' && typeof prevProps.value == 'undefined') {
+        if (!isSame(this.props.value, prevProps.value)) {
+          this.setValue(this.props.value);
+        }
+      });
     }
 
     // Detach it when component unmounts
@@ -118,18 +129,16 @@ export default Component => {
 
     showError = () => !this.props.isRequired && !this.props.isValid;
 
-    isPristine = () => this.props.value === this.props.pristineValue;
-
     render() {
       const propsForElement = {
         ...this.props,
         errorMessage: this.getErrorMessage(),
         errorMessages: this.getErrorMessages(),
-        hasValue: !!this.props.value,
+        hasValue: !!this.props.currentValue,
         isFormDisabled: this.props.isFormDisabled,
         isFormSubmitted: this.props.formSubmitted,
-        isRequired: this.props.required,
-        isPristine: this.isPristine(),
+        isRequired: !!this.props.required,
+        isPristine: this.props.currentValue === this.props.pristineValue,
         isValid: this.props.isValid,
         isValidValue: this.isValidValue,
         resetValue: this.resetValue,
@@ -137,7 +146,7 @@ export default Component => {
         setValue: this.setValue,
         showError: this.showError(),
         showRequired: this.props.isRequired,
-        value: this.props.value,
+        value: this.props.currentValue || this.props.value,
       };
 
       return <Component {...propsForElement} />;

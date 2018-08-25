@@ -1,7 +1,7 @@
 import React from 'react';
 import Formsy, { withFormsy } from '../../src';
 
-class TestInput extends React.Component {
+export class TestInput extends React.Component {
     static defaultProps = { type: 'text' };
 
     updateValue = (event) => {

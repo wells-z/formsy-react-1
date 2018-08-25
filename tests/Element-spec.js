@@ -3,7 +3,7 @@ import TestUtils from 'react-dom/test-utils';
 import sinon from 'sinon';
 
 import Formsy, { withFormsy } from '../src';
-import TestInput, { InputFactory } from './utils/TestInput';
+import TestInput, { InputFactory, TestInput as InnerInput } from './utils/TestInput';
 import immediate from './utils/immediate';
 
 export default {
@@ -101,7 +101,7 @@ export default {
 
   },
 
-  'should return true or false when calling isValid() depending on valid state': function (test) {
+  'should have isValid true or false depending on valid state': function (test) {
 
     const form = TestUtils.renderIntoDocument(
       <Formsy action="/users">
@@ -115,79 +115,69 @@ export default {
     let inputNode = TestUtils.findRenderedDOMComponentWithTag(form, 'INPUT');
     TestUtils.Simulate.change(inputNode, {target: {value: 'foo@foo.com'}});
 
-    inputComponent= TestUtils.findRenderedDOMComponentWithTag(form, TestInput);
+    inputComponent= TestUtils.findRenderedComponentWithType(form, TestInput);
     test.equal(inputComponent.props.isValid, true);
 
     test.done();
 
   },
 
-  'should return true or false when calling isRequired() depending on passed required attribute': function (test) {
+  'should have required true or false depending on passed required attribute': function (test) {
 
-    const isRequireds = [];
-    const Input = InputFactory({
-      componentDidMount: function() {
-        isRequireds.push(this.props.isRequired);
-      }
-    });
-    TestUtils.renderIntoDocument(
-      <Formsy action="/users">
-        <Input name="foo" value=""/>
-        <Input name="foo" value="" required/>
-        <Input name="foo" value="foo" required="isLength:3"/>
-      </Formsy>
-    );
-
-    test.equal(isRequireds[0], false);
-    test.equal(isRequireds[1], true);
-    test.equal(isRequireds[2], true);
-
-    test.done();
-
-  },
-
-  'should return true or false when calling showRequired() depending on input being empty and required is passed, or not': function (test) {
-
-    const showRequireds = [];
-    const Input = InputFactory({
-      componentDidMount: function() {
-        showRequireds.push(this.props.showRequired);
-      }
-    });
-    TestUtils.renderIntoDocument(
-      <Formsy action="/users">
-        <Input name="A" value="foo"/>
-        <Input name="B" value="" required/>
-        <Input name="C" value=""/>
-      </Formsy>
-    );
-
-    test.equal(showRequireds[0], false);
-    test.equal(showRequireds[1], true);
-    test.equal(showRequireds[2], false);
-
-    test.done();
-
-  },
-
-  'should return true or false when calling isPristine() depending on input has been "touched" or not': function (test) {
-
-    let isPristine = null;
-    const Input = InputFactory({
-      componentWillReceiveProps: function(nextProps) {
-        isPristine = nextProps.isPristine;
-      }
-    });
     const form = TestUtils.renderIntoDocument(
       <Formsy action="/users">
-        <Input name="A" value="foo"/>
+        <TestInput name="foo1" value=""/>
+        <TestInput name="foo2" value="" required/>
+        <TestInput name="foo3" value="foo" required="isLength:3"/>
       </Formsy>
     );
 
-    test.equal(isPristine, true);
-    const input = TestUtils.findRenderedDOMComponentWithTag(form, 'INPUT');
-    TestUtils.Simulate.change(input, {target: {value: 'foo'}});
-    test.equal(isPristine, false);
+    const inputs = TestUtils.scryRenderedComponentsWithType(form, InnerInput);
+
+    test.equal(inputs[0].props.isRequired, false);
+    test.equal(inputs[1].props.isRequired, true);
+    test.equal(inputs[2].props.isRequired, true);
+
+    test.done();
+
+  },
+
+  'should have isRequired true or false depending on input being empty and required is passed, or not': function (test) {
+
+    const form = TestUtils.renderIntoDocument(
+      <Formsy action="/users">
+        <TestInput name="A" value="foo"/>
+        <TestInput name="B" value="" required/>
+        <TestInput name="C" value=""/>
+      </Formsy>
+    );
+
+    const inputs = TestUtils.scryRenderedComponentsWithType(form, InnerInput);
+
+    test.equal(inputs[0].props.showRequired, false);
+    test.equal(inputs[1].props.showRequired, true);
+    test.equal(inputs[2].props.showRequired, false);
+
+    test.done();
+
+  },
+
+  'should have isPristine true or false depending on whether input has been "touched" or not': function (test) {
+
+    const form = TestUtils.renderIntoDocument(
+      <Formsy action="/users">
+        <TestInput name="A" value="foo"/>
+      </Formsy>
+    );
+
+    let inputComponent = TestUtils.findRenderedComponentWithType(form, InnerInput);
+    test.equal(inputComponent.props.isPristine, true);
+    
+    const inputNode = TestUtils.findRenderedDOMComponentWithTag(form, 'INPUT');
+    TestUtils.Simulate.change(inputNode, {target: {value: 'bar'}});
+
+    inputComponent = TestUtils.findRenderedComponentWithType(form, InnerInput);
+    test.equal(inputComponent.props.isPristine, false);
 
     test.done();
 
@@ -197,11 +187,13 @@ export default {
 
     class TestForm extends React.Component {
       state = {value: undefined};
+
       changeValue = () => {
         this.setState({
           value: 'foo'
         });
       }
+
       render() {
         return (
           <Formsy action="/users">
@@ -210,10 +202,12 @@ export default {
         );
       }
     }
+
     const form = TestUtils.renderIntoDocument(<TestForm/>);
 
     form.changeValue();
     const input = TestUtils.findRenderedDOMComponentWithTag(form, 'INPUT');
+
     immediate(() => {
       test.equal(input.value, 'foo');
       test.done();

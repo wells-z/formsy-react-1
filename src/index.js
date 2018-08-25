@@ -83,14 +83,14 @@ class Formsy extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     const inputNames = Object.keys(this.state.inputs);
 
-    if (inputNames.length != Object.keys(prevState.inputs).length || inputNames.some(name => !isSame(this.state.inputs[name].value, prevState.inputs[name].value))) {
+    if (inputNames.length != Object.keys(prevState.inputs).length || inputNames.some(name => !isSame(this.state.inputs[name].currentValue, prevState.inputs[name].currentValue))) {
       this.validateForm();
     }
   }
 
   mapInputState = (callback) => mapInputState(this.state, callback);
 
-  getCurrentValues = () => Object.keys(this.state.inputs).map(input => input.value);
+  getCurrentValues = () => Object.keys(this.state.inputs).map(input => input.currentValue);
 
   getModel = () => this.mapModel(this.getCurrentValues());
 
@@ -158,7 +158,7 @@ class Formsy extends React.Component {
     this.setState(prevState => ({
       inputs: mapInputState(prevState, (input, name) => ({
         ...input,
-        value: name in data ? data[name] : input.pristineValue,
+        currentValue: name in data ? data[name] : input.pristineValue,
       })),
     }));
 
@@ -166,7 +166,7 @@ class Formsy extends React.Component {
   };
 
   // Checks validation on current value or a passed value
-  runValidation = (input, name, value = input.value) => {
+  runValidation = (input, name, value = input.currentValue) => {
     const currentValues = this.getCurrentValues();
 
     const {
@@ -377,7 +377,7 @@ class Formsy extends React.Component {
           ...this.state.inputs,
           [name]: {
             ...this.state.inputs[name],
-            value,
+            currentValue: value,
           }
         },
       });
@@ -387,7 +387,7 @@ class Formsy extends React.Component {
           ...this.state.inputs,
           [name]: {
             ...this.state.inputs[name],
-            value,
+            currentValue: value,
           }
         },
       }, () => {
@@ -402,7 +402,7 @@ class Formsy extends React.Component {
         ...this.state.inputs,
         [name]: {
           ...this.state.inputs[name],
-          value: this.state.inputs[name].pristineValue,
+          currentValue: this.state.inputs[name].pristineValue,
         },
       }
     }, () => {
@@ -452,8 +452,6 @@ class Formsy extends React.Component {
       preventExternalInvalidation,
       // reset,
       resetValue,
-      showError,
-      showRequired,
       validationErrors,
       ...nonFormsyProps
     } = this.props;
@@ -492,8 +490,6 @@ Formsy.defaultProps = {
   onValidSubmit: () => {},
   preventExternalInvalidation: false,
   resetValue: () => {},
-  showError: () => {},
-  showRequired: () => {},
   validationErrors: null,
 };
 
@@ -513,8 +509,6 @@ Formsy.propTypes = {
   onValidSubmit: PropTypes.func,
   preventExternalInvalidation: PropTypes.bool,
   resetValue: PropTypes.func,
-  showError: PropTypes.func,
-  showRequired: PropTypes.func,
   validationErrors: PropTypes.object, // eslint-disable-line
 };
 

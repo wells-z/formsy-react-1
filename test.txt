@@ -9,132 +9,24 @@ Warning: Failed prop type: The prop `formsy` is marked as required in `Formsy(Co
 ✔ default - withFormsy: should only set the value and not validate when calling setValue(val, false)
 ✔ default - should set back to pristine value when running reset
 ✔ default - should return error message passed when calling getErrorMessage()
-[31m✖ default - should return true or false when calling isValid() depending on valid state[39m
-
-TypeError: tagName.toUpperCase is not a function
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/react-dom/cjs/react-dom-test-utils.development.js:834:92
-    at findAllInRenderedFiberTreeInternal (/home/milosrasic/node/opensource/formsy-react/node_modules/react-dom/cjs/react-dom-test-utils.development.js:700:11)
-    at Object.findAllInRenderedTree (/home/milosrasic/node/opensource/formsy-react/node_modules/react-dom/cjs/react-dom-test-utils.development.js:783:12)
-    at Object.scryRenderedDOMComponentsWithTag (/home/milosrasic/node/opensource/formsy-react/node_modules/react-dom/cjs/react-dom-test-utils.development.js:833:27)
-    at Object.findRenderedDOMComponentWithTag (/home/milosrasic/node/opensource/formsy-react/node_modules/react-dom/cjs/react-dom-test-utils.development.js:845:30)
-    at Object.shouldReturnTrueOrFalseWhenCallingIsValidDependingOnValidState (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:118:31)
-    at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
-    at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16
-    at Object.exports.runTest (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:70:9)
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:118:25
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:513:13
-    at iterate (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:123:13)
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:134:25
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:515:17
-    at Immediate._onImmediate (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/types.js:146:17)
-
-[31m✖ default - should return true or false when calling isRequired() depending on passed required attribute[39m
-
-AssertionError: 'isLength:3' == true
-    at Object.equal (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/types.js:83:39)
-    at Object.shouldReturnTrueOrFalseWhenCallingIsRequiredDependingOnPassedRequiredAttribute (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:143:10)
-    at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
-    at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16
-    at Object.exports.runTest (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:70:9)
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:118:25
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:513:13
-    at iterate (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:123:13)
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:134:25
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:515:17
-    at Immediate._onImmediate (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/types.js:146:17)
-    at runCallback (timers.js:794:20)
-    at tryOnImmediate (timers.js:752:5)
-    at processImmediate [as _immediateCallback] (timers.js:729:5)
-
-[31m✖ default - should return true or false when calling showRequired() depending on input being empty and required is passed, or not[39m
-
-AssertionError: false == undefined
-    at Object.equal (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/types.js:83:39)
-    at Object.shouldReturnTrueOrFalseWhenCallingShowRequiredDependingOnInputBeingEmptyAndRequiredIsPassedOrNot (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:165:10)
-    at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
-    at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16
-    at Object.exports.runTest (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:70:9)
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:118:25
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:513:13
-    at iterate (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:123:13)
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:134:25
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:515:17
-    at Immediate._onImmediate (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/types.js:146:17)
-    at runCallback (timers.js:794:20)
-    at tryOnImmediate (timers.js:752:5)
-    at processImmediate [as _immediateCallback] (timers.js:729:5)
-
-AssertionError: true == undefined
-    at Object.equal (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/types.js:83:39)
-    at Object.shouldReturnTrueOrFalseWhenCallingShowRequiredDependingOnInputBeingEmptyAndRequiredIsPassedOrNot (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:166:10)
-    at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
-    at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16
-    at Object.exports.runTest (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:70:9)
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:118:25
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:513:13
-    at iterate (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:123:13)
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:134:25
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:515:17
-    at Immediate._onImmediate (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/types.js:146:17)
-    at runCallback (timers.js:794:20)
-    at tryOnImmediate (timers.js:752:5)
-    at processImmediate [as _immediateCallback] (timers.js:729:5)
-
-AssertionError: false == undefined
-    at Object.equal (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/types.js:83:39)
-    at Object.shouldReturnTrueOrFalseWhenCallingShowRequiredDependingOnInputBeingEmptyAndRequiredIsPassedOrNot (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:167:10)
-    at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
-    at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16
-    at Object.exports.runTest (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:70:9)
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:118:25
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:513:13
-    at iterate (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:123:13)
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:134:25
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:515:17
-    at Immediate._onImmediate (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/types.js:146:17)
-    at runCallback (timers.js:794:20)
-    at tryOnImmediate (timers.js:752:5)
-    at processImmediate [as _immediateCallback] (timers.js:729:5)
-
-[31m✖ default - should return true or false when calling isPristine() depending on input has been "touched" or not[39m
-
-AssertionError: true == false
-    at Object.equal (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/types.js:83:39)
-    at Object.shouldReturnTrueOrFalseWhenCallingIsPristineDependingOnInputHasBeenTouchedOrNot (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:190:10)
-    at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
-    at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16
-    at Object.exports.runTest (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:70:9)
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:118:25
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:513:13
-    at iterate (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:123:13)
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:134:25
-    at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/deps/async.js:515:17
-    at Immediate._onImmediate (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/types.js:146:17)
-    at runCallback (timers.js:794:20)
-    at tryOnImmediate (timers.js:752:5)
-    at processImmediate [as _immediateCallback] (timers.js:729:5)
-
-[31m✖ default - should allow an undefined value to be updated to a value[39m
-
-AssertionError: '' == 'foo'
-    at Object.equal (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/types.js:83:39)
-    at Timeout._onTimeout (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:218:12)
-    at ontimeout (timers.js:482:11)
-    at tryOnTimeout (timers.js:317:5)
-    at Timer.listOnTimeout (timers.js:277:5)
-
+✔ default - should have isValid true or false depending on valid state
+✔ default - should have required true or false depending on passed required attribute
+✔ default - should have isRequired true or false depending on input being empty and required is passed, or not
+✔ default - should have isPristine true or false depending on whether input has been "touched" or not
+Warning: A component is changing an uncontrolled input of type text to be controlled. Input elements should not switch from uncontrolled to controlled (or vice versa). Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://fb.me/react-controlled-components
+    in input (created by TestInput)
+    in TestInput (created by Formsy(Component))
+    in Formsy(Component) (created by TestForm)
+    in form (created by Formsy)
+    in Formsy (created by TestForm)
+    in TestForm
+✔ default - should allow an undefined value to be updated to a value
 ✔ default - should be able to test a values validity
 ✔ default - should be able to use an object as validations property
 [31m✖ default - should be able to pass complex values to a validation rule[39m
 
 TypeError: inputComponent.isValid is not a function
-    at Object.shouldBeAbleToPassComplexValuesToAValidationRule (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:283:31)
+    at Object.shouldBeAbleToPassComplexValuesToAValidationRule (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:277:31)
     at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
     at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
     at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16
@@ -152,7 +44,7 @@ TypeError: inputComponent.isValid is not a function
 [31m✖ default - should be able to run a function to validate[39m
 
 TypeError: inputComponent[0].isValid is not a function
-    at Object.shouldBeAbleToRunAFunctionToValidate (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:317:34)
+    at Object.shouldBeAbleToRunAFunctionToValidate (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:311:34)
     at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
     at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
     at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16
@@ -174,7 +66,7 @@ TypeError: inputComponent[0].isValid is not a function
 [31m✖ default - should not be valid if it is required and required rule is true[39m
 
 TypeError: inputComponent.isValid is not a function
-    at Object.shouldNotBeValidIfItIsRequiredAndRequiredRuleIsTrue (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:445:31)
+    at Object.shouldNotBeValidIfItIsRequiredAndRequiredRuleIsTrue (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:439:31)
     at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
     at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
     at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16
@@ -189,7 +81,9 @@ TypeError: inputComponent.isValid is not a function
     at tryOnImmediate (timers.js:752:5)
     at processImmediate [as _immediateCallback] (timers.js:729:5)
 
-The above error occurred in the <Formsy> component:
+The above error occurred in the <Formsy(Component)> component:
+    in Formsy(Component) (created by TestForm)
+    in form (created by Formsy)
     in Formsy (created by TestForm)
     in TestForm
 
@@ -229,7 +123,7 @@ Invariant Violation: Maximum update depth exceeded. This can happen when a compo
     at renderSubtreeIntoContainer (/home/milosrasic/node/opensource/formsy-react/node_modules/react-dom/cjs/react-dom.development.js:15231:17)
     at Object.render (/home/milosrasic/node/opensource/formsy-react/node_modules/react-dom/cjs/react-dom.development.js:15296:12)
     at Object.renderIntoDocument (/home/milosrasic/node/opensource/formsy-react/node_modules/react-dom/cjs/react-dom-test-utils.development.js:740:21)
-    at Object.shouldHandleIsFormDisabledWithDynamicInputs (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:502:28)
+    at Object.shouldHandleIsFormDisabledWithDynamicInputs (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:496:28)
     at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
     at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
     at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16
@@ -249,7 +143,7 @@ Invariant Violation: Maximum update depth exceeded. This can happen when a compo
     at renderSubtreeIntoContainer (/home/milosrasic/node/opensource/formsy-react/node_modules/react-dom/cjs/react-dom.development.js:15231:17)
     at Object.render (/home/milosrasic/node/opensource/formsy-react/node_modules/react-dom/cjs/react-dom.development.js:15296:12)
     at Object.renderIntoDocument (/home/milosrasic/node/opensource/formsy-react/node_modules/react-dom/cjs/react-dom-test-utils.development.js:740:21)
-    at Object.shouldAllowForDotNotationInNameWhichMapsToADeepObject (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:528:28)
+    at Object.shouldAllowForDotNotationInNameWhichMapsToADeepObject (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:522:28)
     at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
     at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
     at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16
@@ -269,7 +163,7 @@ Invariant Violation: Maximum update depth exceeded. This can happen when a compo
     at renderSubtreeIntoContainer (/home/milosrasic/node/opensource/formsy-react/node_modules/react-dom/cjs/react-dom.development.js:15231:17)
     at Object.render (/home/milosrasic/node/opensource/formsy-react/node_modules/react-dom/cjs/react-dom.development.js:15296:12)
     at Object.renderIntoDocument (/home/milosrasic/node/opensource/formsy-react/node_modules/react-dom/cjs/react-dom-test-utils.development.js:740:21)
-    at Object.shouldAllowForApplicationXWwwFormUrlencodedSyntaxAndConvertToObject (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:554:28)
+    at Object.shouldAllowForApplicationXWwwFormUrlencodedSyntaxAndConvertToObject (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:548:28)
     at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
     at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
     at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16
@@ -289,7 +183,7 @@ Invariant Violation: Maximum update depth exceeded. This can happen when a compo
     at renderSubtreeIntoContainer (/home/milosrasic/node/opensource/formsy-react/node_modules/react-dom/cjs/react-dom.development.js:15231:17)
     at Object.render (/home/milosrasic/node/opensource/formsy-react/node_modules/react-dom/cjs/react-dom.development.js:15296:12)
     at Object.renderIntoDocument (/home/milosrasic/node/opensource/formsy-react/node_modules/react-dom/cjs/react-dom-test-utils.development.js:740:21)
-    at Object.inputShouldRenderedOnceWithPureRenderMixin (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:577:28)
+    at Object.inputShouldRenderedOnceWithPureRenderMixin (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:571:28)
     at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
     at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
     at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16
@@ -309,7 +203,7 @@ Invariant Violation: Maximum update depth exceeded. This can happen when a compo
     at renderSubtreeIntoContainer (/home/milosrasic/node/opensource/formsy-react/node_modules/react-dom/cjs/react-dom.development.js:15231:17)
     at Object.render (/home/milosrasic/node/opensource/formsy-react/node_modules/react-dom/cjs/react-dom.development.js:15296:12)
     at Object.renderIntoDocument (/home/milosrasic/node/opensource/formsy-react/node_modules/react-dom/cjs/react-dom-test-utils.development.js:740:21)
-    at Object.bindsAllNecessaryMethods (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:608:15)
+    at Object.bindsAllNecessaryMethods (/home/milosrasic/node/opensource/formsy-react/tests/Element-spec.js:602:15)
     at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
     at Object.<anonymous> (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16)
     at /home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:236:16
@@ -3692,6 +3586,6 @@ Invariant Violation: Maximum update depth exceeded. This can happen when a compo
     at Object.exports.runTest (/home/milosrasic/node/opensource/formsy-react/node_modules/nodeunit/lib/core.js:70:9)
 
 
-[1m[31mFAILURES: [39m[22m183/200 assertions failed (1560ms)
+[1m[31mFAILURES: [39m[22m176/200 assertions failed (1248ms)
 error Command failed with exit code 1.
 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
