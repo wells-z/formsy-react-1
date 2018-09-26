@@ -274,10 +274,12 @@ export default {
     const form = TestUtils.renderIntoDocument(<TestForm/>);
 
     const inputComponent = TestUtils.findRenderedComponentWithType(form, TestInput);
-    test.equal(inputComponent.isValid(), true);
+    test.equal(inputComponent.props.isValid, true);
+
     const input = TestUtils.findRenderedDOMComponentWithTag(form, 'INPUT');
     TestUtils.Simulate.change(input, {target: {value: 'bar'}});
-    test.equal(inputComponent.isValid(), false);
+
+    test.equal(inputComponent.props.isValid, false);
 
     test.done();
 
@@ -289,9 +291,11 @@ export default {
       customValidationA(values, value) {
         return value === 'foo';
       }
+
       customValidationB(values, value) {
         return value === 'foo' && values.A === 'foo';
       }
+
       render() {
         return (
           <Formsy>
@@ -305,15 +309,18 @@ export default {
         );
       }
     }
+
     const form = TestUtils.renderIntoDocument(<TestForm/>);
 
     const inputComponent = TestUtils.scryRenderedComponentsWithType(form, TestInput);
-    test.equal(inputComponent[0].isValid(), true);
-    test.equal(inputComponent[1].isValid(), true);
+    test.equal(inputComponent[0].props.isValid, true);
+    test.equal(inputComponent[1].props.isValid, true);
+
     const input = TestUtils.scryRenderedDOMComponentsWithTag(form, 'INPUT');
     TestUtils.Simulate.change(input[0], {target: {value: 'bar'}});
-    test.equal(inputComponent[0].isValid(), false);
-    test.equal(inputComponent[1].isValid(), false);
+
+    test.equal(inputComponent[0].props.isValid, false);
+    test.equal(inputComponent[1].props.isValid, false);
 
     test.done();
 
@@ -436,7 +443,7 @@ export default {
     const form = TestUtils.renderIntoDocument(<TestForm/>);
 
     const inputComponent = TestUtils.findRenderedComponentWithType(form, TestInput);
-    test.equal(inputComponent.isValid(), false);
+    test.equal(inputComponent.props.isValid, false);
 
     test.done();
 
